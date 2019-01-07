@@ -1,28 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-class App extends Component {
+const Person = (props) => {
+  return (
+    <li>{props.name}<button onClick={props.handleClick}>Usuń</button></li>
+  )
+}
+
+class List extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      people : [
+        {
+          id: 1,
+          name: "Marek Kowalski",
+        },
+        {
+          id: 2,
+          name: "Edyta Nowak",
+        },
+        {
+          id: 3,
+          name: "Marta xyz",
+        },
+      ]
+      
+    }
+  }
+
+  handleClick = () => {
+    console.log('click')
+  }
+
   render() {
+    console.log(this.state.people[1].id)
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <ul>
+        {this.state.people.map(item => <Person key={item.id} name={item.name} handleClick={this.handleClick} />)}     
+      </ul>
+      
     );
   }
 }
 
-export default App;
+export default List;
